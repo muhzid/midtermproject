@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BMW Global Sales Dashboard (2010–2024)</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="header-content">
+        <div class="brand">
+          <h1>BMW Global Sales Dashboard</h1>
+          <p class="subtitle">Tren penjualan per tahun berdasarkan model, harga, & spesifikasi (2010–2024)</p>
+        </div>
+        <div class="controls">
+          <div class="control-row">
+            <label for="modelSelect">Model:</label>
+            <select id="modelSelect">
+              <option value="__ALL__">— Semua Model —</option>
+            </select>
+          </div>
+          <div class="control-row">
+            <label>Region:</label>
+            <div id="regionCheckboxes" class="chips"></div>
+          </div>
+          <div class="control-row year-controls">
+  <label>Year Range:</label>
+  <select id="yearStart">
+    <!-- Akan di-populate oleh JavaScript -->
+  </select>
+  <span class="year-separator">to</span>
+  <select id="yearEnd">
+    <!-- Akan di-populate oleh JavaScript -->
+  </select>
+  <button id="applyYearRange" class="apply-btn">Apply</button>
+</div>
+
+<div class="control-row timeline-controls">
+  <label>Timeline:</label>
+  <button id="playBtn">▶ Play</button>
+  <input id="yearSlider" type="range" min="2010" max="2024" step="1" value="2010">
+  <span id="yearLabel">2010</span>
+</div>
+        </div>
+      </div>
+    </header>
+    <section class="intro">
+      <h2>BMW W nya apa?</h2>
+      <p>
+          Dashboard ini menyajikan analisis penjualan global BMW dari tahun <strong>2010 hingga 2024</strong>.
+          Setiap grafik memberikan wawasan tentang tren penjualan tahunan, hubungan antara harga dan volume
+          penjualan, serta distribusi spesifikasi kendaraan seperti jenis transmisi dan bahan bakar.
+          Visualisasi ini dirancang untuk membantu memahami pola pasar, mengidentifikasi model unggulan,
+          dan mendukung pengambilan keputusan berbasis data.
+      </p>
+      </section>
+    
+    <main class="grid">
+      <section class="card">
+        <h2>Tren Penjualan per Tahun (Total Sales Volume)</h2>
+        <div id="lineChart"></div>
+      </section>
+      
+      <section class="card">
+        <h2>Harga vs Sales (Titik = Model)</h2>
+        <div id="scatterChart"></div>
+      </section>
+      
+      <section class="card full">
+        <h2>Distribusi Spesifikasi (Transmission & Fuel Type)</h2>
+        <div id="barChart"></div>
+      </section>
+    </main>
+    
+    <footer class="footer">
+      <small>Data: Dataset BMW (2010–2024)</small>
+    </footer>
+  </div>
+  
+  <div id="tooltip" class="tooltip" style="opacity:0;"></div>
+  
+  <div id="chartModal" class="chart-modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="modal-header">
+      <h2 id="modalTitle">Chart Title</h2>
+    </div>
+    <div class="modal-body" id="modalChartContainer">
+      <!-- Chart akan di-clone ke sini -->
+    </div>
+  </div>
+  </div>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
